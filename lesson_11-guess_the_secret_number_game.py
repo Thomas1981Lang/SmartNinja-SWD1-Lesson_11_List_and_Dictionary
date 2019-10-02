@@ -1,6 +1,10 @@
+import datetime
 import json
 import random
 
+
+current_time = datetime.datetime.now()
+print(current_time)
 
 secret = random.randint(1, 30)
 attempts = 0
