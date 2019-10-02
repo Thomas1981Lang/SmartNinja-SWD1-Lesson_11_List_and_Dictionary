@@ -3,23 +3,25 @@ import json
 import random
 
 
-current_time = datetime.datetime.now()
-print(current_time)
+# current_time = datetime.datetime.now()
+# print(current_time)
 
 secret = random.randint(1, 30)
 attempts = 0
 
 with open('score_list.txt', 'r') as score_file:
     score_list = json.loads(score_file.read())
-    score_list.sort()
-    print('Top score: ' + str(score_list[:3]))
+    # score_list.sort()
+    # print('Top score: ' + str(score_list[:3]))
+    for score_dict in score_list:
+        print(str(score_dict['attempts']) + ' attempts, date: ' + score_dict.get('date'))
 
 while True:
     guess = int(input("Guess the secret number (between 1 and 30): "))
     attempts += 1
 
     if guess == secret:
-        score_list.append(attempts)
+        score_list.append({'attempts': attempts, 'date': str(datetime.datetime.now())})
 
         with open('score_list.txt', 'w') as score_file:
             score_file.write(json.dumps(score_list))
